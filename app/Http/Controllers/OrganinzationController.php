@@ -15,7 +15,7 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-        $organizations = Organization::with(['members', 'projects'])->paginate(10);
+        $organizations = Organization::with(['members', 'projects']);
         return OrganizationResource::collection($organizations);
     }
 
@@ -34,7 +34,7 @@ class OrganizationController extends Controller
      */
     public function show(Organization $organization)
     {
-        $organization->load(['members', 'projects']); 
+        $organization->load(['members', 'projects']);
         return new OrganizationResource($organization);
     }
 
