@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\{AuthController, ProjectController, TaskController};
+use App\Http\Controllers\OrganizationController;
 
 // Public Routes
 Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
@@ -18,4 +19,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // Task routes
     Route::apiResource('/tasks', TaskController::class);
+
+    //Organization routes
+    Route::apiResources('/organizations',OrganizationController::class);
 });
