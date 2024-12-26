@@ -11,20 +11,28 @@ class Project extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title', 'slug', 'description', 'deadline', 'org_id', 'created_by'
+        'title',
+        'slug',
+        'description',
+        'deadline',
+        'org_id',
+        'created_by'
     ];
 
-    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-    // Relationships
-    public function users()
+    public function creator()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function organizations()
+    public function organization()
     {
-        return $this->belongsTo(Organization::class);
+        return $this->belongsTo(Organization::class, 'org_id');
     }
 
     public function tasks()
