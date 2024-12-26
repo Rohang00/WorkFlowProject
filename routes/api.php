@@ -21,5 +21,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/tasks', TaskController::class);
 
     //Organization routes
-    Route::apiResources('/organizations',OrganizationController::class);
+    Route::apiResource('/organizations',OrganizationController::class);
 });

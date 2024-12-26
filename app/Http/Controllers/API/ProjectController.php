@@ -14,16 +14,14 @@ class ProjectController extends Controller
 {
     public function index(): AnonymousResourceCollection|JsonResponse
     {
-        // Pagination Part, need to ask regarding how to make API's for pagination and non-pagination
-        // $projects = Project::paginate(10);
-        // return ProjectResource::collection($projects);
-
-        return ProjectResource::collection(Project::all());
+        $perPage = request()->query('per_page', 5);
+        $projects = Project::with(['creator', 'organization', 'tasks'])->paginate($perPage);
+        return ProjectResource::collection($projects);
     }
 
     public function show(Project $project): ProjectResource
     {
-        $project = Project::findorFail($project);
+        $project->load(['creator', 'organization', 'tasks']);
         return new ProjectResource($project);
     }
 

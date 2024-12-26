@@ -15,14 +15,18 @@ class TaskController extends Controller
 {
     public function index(): AnonymousResourceCollection|JsonResponse
     {
-        return TaskResource::collection(Task::all());
+        $perPage = request()->query('per_page', 5);
+        $tasks = Task::with(['assignedTo', 'completedBy', 'project'])->paginate($perPage);
+        return TaskResource::collection($tasks);
     }
 
     public function show(Task $task): TaskResource
     {
-        $task = Task::findorFail($task);
+        // load() adds specified relationships to the already resolved task instance so dont need to make n+1 query
+        $task->load(['assignedTo', 'completedBy', 'project']);
         return new TaskResource($task);
     }
+
     public function store(TaskStoreRequest $request): JsonResponse
     {
         $task = Task::create($request->validated());
