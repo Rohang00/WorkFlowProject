@@ -20,6 +20,7 @@ class ProjectControllerTest extends TestCase
     {
         parent::setUp();
 
+        //Arrange: Create a base user and get authentication token
         $this->user = User::factory()->create([
             'password' => Hash::make('password'),
         ]);
@@ -255,7 +256,6 @@ class ProjectControllerTest extends TestCase
                 'organization' => [
                     'id',
                     'name',
-                    // Add other organization fields as required
                 ],
                 'tasks',  // Assuming tasks are included
             ]
@@ -268,4 +268,6 @@ class ProjectControllerTest extends TestCase
         $this->assertEquals('Updated project description.', $project->description);
         $this->assertEquals(now()->addDays(45)->toDateString(), $project->deadline);
     }
+
+    
 }
