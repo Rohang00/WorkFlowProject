@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Member\MemberStoreRequest;
 use App\Http\Requests\Member\MemberUpdateRequest;
 use App\Http\Resources\MemberResource;
@@ -13,9 +14,15 @@ class MemberController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-       return MemberResource::collection( Member::paginate(10));
+        $data = Member::with(['users','organizations'])->get();
+       return MemberResource::collection( $data);
     }
 
     /**
@@ -55,3 +62,8 @@ class MemberController extends Controller
         ]);
     }
 }
+
+
+
+
+

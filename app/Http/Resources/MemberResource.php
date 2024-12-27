@@ -22,6 +22,9 @@ class MemberResource extends JsonResource
             "status"=>$this->status,
             "user_id"=>$this->user_id,
             "org_id"=>$this->org_id,
+            "user"=> new UserResource($this->users),
+            "organization"=> new OrganizationResource($this->organizations),
+
         ];
     }
 }
