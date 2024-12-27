@@ -30,6 +30,10 @@ class TaskController extends Controller
     public function store(TaskStoreRequest $request): JsonResponse
     {
         $task = Task::create($request->validated());
+
+        // Eager load the assignedTo relationship
+        $task->load('assignedTo','project');
+
         return response()->json([
             'message' => 'Task Created Successfully',
             'data'=> new TaskResource($task),
