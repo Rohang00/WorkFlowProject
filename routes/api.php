@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\{AuthController, ProjectController, TaskController, OrganizationController, UserController, MemberController};
 
@@ -24,4 +23,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //Organization routes
     Route::apiResource('/organizations',OrganizationController::class);
+  
+    //Members routes
+    Route::apiResource('/member',MemberController::class);
 });

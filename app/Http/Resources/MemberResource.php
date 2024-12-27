@@ -10,15 +10,20 @@ class MemberResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param Request $request
      * @return array<string, mixed>
      */
-    public function toArray($request): array
+    public function toArray(Request $request): array
     {
+        // return parent::toArray($request);
+
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'role' => $this->role ?? 'N/A',
+            "id"=>$this->id,
+            "role"=>$this->role,
+            "status"=>$this->status,
+            "user_id"=>$this->user_id,
+            "org_id"=>$this->org_id,
+            "user"=> new UserResource($this->users),
+            "organization"=> new OrganizationResource($this->organizations),
         ];
     }
 }
