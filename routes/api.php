@@ -13,6 +13,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Auth-related routes
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
+    // User routes
+    Route::apiResource('/users', ProjectController::class);
+
     // Project routes
     Route::apiResource('/projects', ProjectController::class);
 
