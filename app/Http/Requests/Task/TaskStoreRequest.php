@@ -20,7 +20,7 @@ class TaskStoreRequest extends FormRequest
             'project_id' => 'required|exists:projects,id',
             'status' => 'required|integer|in:0,1,2',
             'due_date' => 'required|date|after_or_equal:today',
-            'created_by' => 'required|exists:users,id',  // Add this validation rule
+            'created_by' => 'required|exists:users,id',
         ];
     }
 }
