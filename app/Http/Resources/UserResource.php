@@ -28,8 +28,14 @@ class UserResource extends JsonResource
             'last_login_at' => $this->last_login_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'members' => MemberResource::collection($this->whenLoaded('members')),
-            'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
+            'members' =>$this->whenLoaded('members',
+            function (){
+                return new MemberResource($this->members);
+            }),
+            'tasks' =>$this->whenLoaded('tasks',
+            function () {
+                return new TaskResource($this->tasks);
+            }),
         ];
     }
 }
