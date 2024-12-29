@@ -43,6 +43,9 @@ class TaskController extends Controller
     public function update(TaskUpdateRequest $request, Task $task): JsonResponse
     {
         $task->update($request->validated());
+
+        $task->load('assignedTo', 'completedBy', 'project');
+
         return response()->json([
             'message' => 'Task Updated Successfully',
             'data' => new TaskResource($task),
